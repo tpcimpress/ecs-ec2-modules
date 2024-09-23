@@ -43,7 +43,7 @@ resource "aws_ecs_service" "main" {
 
 resource "aws_alb_target_group" "main" {
   count = var.alb_target_group_id_override == "" ? 1 : 0
-  name = "tg${var.environment}${var.service_name}"
+  name = "tg-${var.environment}${var.service_name}"
 
   health_check {
     healthy_threshold   = var.healthy_threshold
@@ -60,7 +60,7 @@ resource "aws_alb_target_group" "main" {
   vpc_id   = var.vpc_id
 
   tags = {
-    Name        = "tg${var.environment}${var.service_name}"
+    Name        = "tg-${var.environment}${var.service_name}"
     Service     = var.service_name
     Environment = var.environment
   }
